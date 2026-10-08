@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="오서연의 포트폴리오 — 콘텐츠 기획, 디자인, 운영 경험과 캐릭터챗에 대한 생각" name="description"/>
+<title>On-sooyeon | Portfolio</title>
+<style>
+/* 포트폴리오 디자인 기준: 사용자가 보내준 PDF 상·중·하 */
+/* 최신 GitHub WOFF 네 파일을 직접 불러옵니다. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+/* 웹폰트: 한글 글리프가 포함된 2026-10-09 업로드 WOFF 파일을 사용합니다.
+   GitHub Pages에서는 같은 폴더의 파일을 우선 불러오며,
+   index.html만 다운로드해 실행하면 GitHub Raw 주소에서 시도합니다.
+   기존의 라틴 전용 -webfont 파일은 사용하지 않습니다. */
+@font-face {
+  font-family:'Portfolio SC4';
+  src:url('./SCDream4.woff?v=ko-20261009') format('woff'),
+      url('https://raw.githubusercontent.com/Mongpposyong/Portfolio/main/SCDream4.woff?v=ko-20261009') format('woff');
+  font-style:normal;font-weight:400;font-display:swap;
+}
+@font-face {
+  font-family:'Portfolio SC7';
+  src:url('./SCDream7.woff?v=ko-20261009') format('woff'),
+      url('https://raw.githubusercontent.com/Mongpposyong/Portfolio/main/SCDream7.woff?v=ko-20261009') format('woff');
+  font-style:normal;font-weight:700;font-display:swap;
+}
+@font-face {
+  font-family:'Portfolio Minguk';
+  src:url('./YoonMingukR.woff?v=ko-20261009') format('woff'),
+      url('https://raw.githubusercontent.com/Mongpposyong/Portfolio/main/YoonMingukR.woff?v=ko-20261009') format('woff');
+  font-style:normal;font-weight:400;font-display:swap;
+}
+@font-face {
+  font-family:'Portfolio Minguk';
+  src:url('./YoonMingukB.woff?v=ko-20261009') format('woff'),
+      url('https://raw.githubusercontent.com/Mongpposyong/Portfolio/main/YoonMingukB.woff?v=ko-20261009') format('woff');
+  font-style:normal;font-weight:700;font-display:swap;
+}
+
+:root{--bg:#303030;--cream:#fff9f0;--brown:#81564b;--green:#80b547;--yellow:#ffce52;--ink:#81564b;--muted:#eeeee3;--max:860px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-synthesis:none;margin:0;background:var(--bg);color:#fff;font-family:'Portfolio SC4','Pretendard Variable','Pretendard',sans-serif;line-height:1.45}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(calc(100% - 52px),var(--max));margin-inline:auto}
+
+/* 맨 위 기본 메뉴 */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:25px 0 25px}
+.brand{font-family:'Pretendard Variable','Pretendard',sans-serif;text-decoration:none;font-size:18px;font-weight:500;letter-spacing:.17em}
+.menu{border:0;color:white;background:transparent;cursor:pointer;font-size:28px;padding:0 6px;line-height:1}
+.nav{display:none;position:absolute;right:max(32px,calc((100vw - var(--max))/2));top:64px;z-index:10;gap:9px;border-radius:10px;padding:14px 20px;background:#47443e;box-shadow:0 12px 36px #0008}
+.nav.open{display:grid}
+.nav a{font:14px 'Pretendard Variable','Pretendard',sans-serif;text-decoration:none}
+
+/* 첫 자기소개 */
+.hero{display:grid;grid-template-columns:34% minmax(0,1fr);gap:7%;align-items:start;padding:12px 15px 24px}
+.hero-pic{height:322px;border-radius:20px;background:#f5f4f2;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-pic img{width:100%;height:100%;object-fit:contain;object-position:center}
+.handle{margin:9px 5px;font-family:'Pretendard Variable','Pretendard',sans-serif;font-size:13px;letter-spacing:.12em;font-weight:700}
+.hero-copy{display:flex;flex-direction:column;min-height:322px;align-items:flex-start}
+.hero h1{font-family:'Portfolio SC7','Pretendard Variable','Pretendard',sans-serif;margin:0 0 7px;font-size:29px;line-height:1.2;letter-spacing:-.045em}
+.star{color:#ffa02b}
+.hero p{margin:0 0 13px;font-size:12.5px;line-height:1.45;font-weight:400;word-break:keep-all}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-family:'Pretendard Variable','Pretendard',sans-serif;display:inline-block;background:#555;border-radius:999px;color:#eee;font-size:11px;line-height:1.2;padding:3px 12px}
+.start{font-family:'Pretendard Variable','Pretendard',sans-serif;display:block;width:100%;margin:auto 0 9px;padding:9px;text-align:center;text-decoration:none;background:var(--green);color:white;border-radius:8px;font-size:19px;letter-spacing:.10em;font-weight:400}
+.rule{border:0;border-top:2px solid #aaa;margin:6px 14% 44px}
+
+/* 공통 포트폴리오 카드 */
+.section{position:relative;margin-bottom:29px;border-radius:10px;overflow:hidden}
+.section-title{font-family:'Portfolio SC7','Pretendard Variable','Pretendard',sans-serif;text-align:center;font-size:23px;background:var(--green);color:#fff;margin:0;padding:11px 10px;line-height:1.1}
+.panel{background:var(--cream);color:var(--ink);border-radius:5px;overflow:hidden}
+.panel h2{font-family:'Portfolio SC7','Pretendard Variable','Pretendard',sans-serif;background:var(--green);color:#fff;font-size:24px;margin:0;padding:10px 18px;line-height:1.25}
+.panel .body{padding:14px 22px 20px}
+.panel h3{font-family:'Portfolio SC7','Pretendard Variable','Pretendard',sans-serif;font-size:14px;margin:0 0 3px}
+.panel p,.panel li{font-size:12.5px;line-height:1.35;margin:3px 0}
+.panel .date{font-family:'Pretendard Variable','Pretendard',sans-serif;font-size:11px;margin:0}
+.panel ul{list-style:none;padding:0;margin:3px 0}
+.panel li:before{content:'- '}
+
+/* 가을숲은 세로 원화를 확대하여 웜뱃이 아래쪽에 놓이도록 배치 */
+.hero-scene{position:relative;min-height:685px;background:var(--brown);isolation:isolate}
+.scene-image{position:absolute;inset:0 auto 0 0;width:61%;overflow:hidden;z-index:0;background:var(--brown)}
+.scene-image>img{position:absolute;left:0;top:0;width:auto;height:100%;max-width:none;object-fit:contain;object-position:left bottom;transform:none}
+.scene-image::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(129,86,75,0) 0%,rgba(129,86,75,0) 52%,rgba(129,86,75,.15) 65%,rgba(129,86,75,.62) 80%,#81564b 95%);pointer-events:none}
+.scene-contents{position:relative;z-index:1;display:flex;flex-direction:column;gap:16px;margin-left:36%;width:64%;min-height:685px;padding:30px 17px 13px 0}
+.scene-contents .panel{flex-shrink:0}
+.scene-contents .panel .body{padding:12px 22px 15px}
+.scene-note{font:12px 'Pretendard Variable','Pretendard',sans-serif;letter-spacing:.06em;text-align:right;margin:auto 4px 0 0;color:#e7d4ce}
+
+/* 성향과 일하는 방식 */
+.brown-section{background:var(--brown);padding:0 24px 22px;overflow:visible}
+.brown-section .section-title{margin:0 -24px}
+.pairs{display:grid;gap:17px;margin-top:18px}
+.pair{display:grid;grid-template-columns:1fr 1fr;background:var(--cream);color:var(--ink);min-height:194px;border-radius:6px;overflow:hidden}
+.pair.reverse .copy{order:2}
+.pair .copy{padding:15px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.pair h3{font-family:'Portfolio SC7','Pretendard Variable','Pretendard',sans-serif;margin:0 0 12px;font-size:17px}
+.pair p{font-size:12px;line-height:1.45;margin:0 0 10px;word-break:keep-all}
+.pair .preview{width:100%;height:100%;object-fit:cover;max-height:none;background:#eee}
+.pair:first-child .preview{object-position:72% 22%;transform:scale(1.07);transform-origin:center top}
+.pair.reverse .preview{object-position:40% 38%;transform:scale(1.14);transform-origin:left center}
+.pair-sticker{position:absolute;width:82px;height:82px;left:22px;bottom:14px;object-fit:contain;z-index:2}
+.banner-msg{font-family:'Portfolio SC7','Pretendard Variable','Pretendard',sans-serif;text-align:center;margin:22px 0 0;font-size:20px;color:var(--yellow);line-height:1.4}
+
+/* 강점 */
+.strengths{padding-bottom:29px}
+.strength-list{display:grid;gap:11px;margin:22px 16px 0}
+.strength{display:grid;grid-template-columns:24% 1fr;min-height:62px;background:var(--cream);color:var(--ink);overflow:hidden;border-radius:12px}
+.strength strong{font-family:'Portfolio SC7','Pretendard Variable','Pretendard',sans-serif;background:var(--yellow);display:grid;place-items:center;text-align:center;padding:8px;font-size:15px}
+.strength p{font-size:13px;line-height:1.5;padding:11px 20px;margin:0;align-self:center}
+.bottom-wombat{position:absolute;width:86px;right:20px;bottom:3px;object-fit:contain}
+
+/* 가치관: 원화가 확대된 상태로 오른쪽에 위치하고 오른쪽에서 왼쪽만 블렌딩 */
+.values{position:relative;min-height:960px;margin-top:42px;background:var(--brown);overflow:hidden;isolation:isolate}
+.values>.panel{position:relative;z-index:2;width:61%;margin:35px 0 34px 4.3%;border-radius:12px}
+.values>.panel h2{font-size:27px;padding:13px 19px}
+.values>.panel .body{padding:21px 24px 25px}
+.values>.panel h3{font-size:21px;margin:12px 0 11px}
+.values>.panel p{font-size:16px;line-height:1.68;margin:8px 0 17px;word-break:keep-all}
+.values mark{background:#ffca48;color:inherit;font-weight:700}
+.values .visual{position:absolute;inset:0 0 0 auto;width:57%;height:100%;overflow:hidden;z-index:0;background:var(--brown)}
+/* 세로 원화의 하단 캐릭터가 프레임 위로 올라오도록 원화 자체를 프레임보다 크게 배치 */
+.values .visual img.bg{position:absolute;left:-12%;top:-19%;width:125%;height:140%;max-width:none;object-fit:cover;object-position:center center;transform:none}
+.values .visual::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to right,#81564b 0%,rgba(129,86,75,.82) 13%,rgba(129,86,75,.49) 29%,rgba(129,86,75,.12) 46%,rgba(129,86,75,0) 63%)}
+
+/* 대화: 원본 PDF의 좌우 말풍선 크기와 여백 */
+.chat-group{margin-top:57px}
+.chat-head{display:flex;justify-content:space-between;align-items:center;letter-spacing:.1em;font-family:'Portfolio Minguk','Pretendard Variable','Pretendard',sans-serif;font-size:17px;font-weight:700;line-height:1.4;margin:0 10px 12px}
+.chat-head strong{font-weight:700}
+.chat-head span{font-family:system-ui,sans-serif;font-weight:400;font-size:22px}
+.chat{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:50px clamp(20px,4.4vw,48px) 64px;background:#fff;color:#171717;border-radius:12px}
+.bubble{position:relative;isolation:isolate;width:max-content;min-width:0;max-width:min(60%,520px);font-family:'Pretendard Variable','Pretendard',sans-serif;font-size:19px;line-height:1.4;white-space:pre-line;overflow-wrap:anywhere;word-break:keep-all;padding:19px 27px 20px;border-radius:34px;margin-bottom:0;font-weight:700}
+.bubble.me{align-self:flex-end;background:var(--green);color:#fff}
+.bubble.them{align-self:flex-start;background:var(--muted);color:#111}
+.bubble.me::after,.bubble.them::after{content:'';position:absolute;z-index:-1;bottom:-25px;width:55px;height:31px;background:inherit;pointer-events:none}
+.bubble.me::after{right:17px;clip-path:polygon(0 0,100% 0,100% 100%)}
+.bubble.them::after{left:29px;clip-path:polygon(0 0,100% 0,0 100%)}
+/* A tail only belongs to the last message in a consecutive message group. */
+.bubble.me:has(+ .bubble.me)::after,
+.bubble.them:has(+ .bubble.them)::after{display:none}
+/* Provide a pause where the speaker switches, as in the supplied chat screenshots. */
+.bubble.me + .bubble.them,
+.bubble.them + .bubble.me{margin-top:clamp(20px,4.2vw,42px)}
+.bubble.me + .bubble.me,
+.bubble.them + .bubble.them{margin-top:-2px}
+.chat-media + .bubble.me{margin-top:24px}
+
+.chat-media{display:flex;gap:12px;flex-wrap:wrap;align-self:flex-start;max-width:72%;margin:10px 0 14px}
+.chat-media img{width:143px;max-width:46%;height:auto;max-height:160px;object-fit:contain;border-radius:8px;background:#fff;box-shadow:0 2px 9px rgba(0,0,0,.14)}
+.chat-media.wide{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;align-items:center;column-gap:14px;row-gap:0;max-width:86%;flex-wrap:nowrap}
+.chat-media.wide img{width:100%;max-width:none;max-height:178px;object-fit:contain}
+.chat-media .more{align-self:center;justify-self:start;background:var(--muted);color:#222;border-radius:999px;padding:8px 13px;font-size:14px;white-space:nowrap}
+.chat-note{align-self:center;font-size:12px;color:#666}
+
+/* 지원자 코멘트: 지하철 이미지는 프레임 안에서 확대하고 위로 이동. 세로로만 흐려짐 */
+.ending{background:var(--brown);margin-top:60px;padding-bottom:50px;overflow:hidden}
+.end-title{font-family:'Portfolio Minguk','Pretendard Variable','Pretendard',sans-serif;font-size:19px;letter-spacing:.09em;font-weight:700;margin:0;padding:0 0 16px 2px;background:var(--bg)}
+.ending .end-photo-wrap{height:305px;position:relative;overflow:hidden;background:var(--brown)}
+.ending .end-photo{position:absolute;inset:0;width:100%;height:100%;max-height:none;object-fit:cover;object-position:50% 72%;transform:scale(1.24);transform-origin:50% 70%}
+.ending .end-photo-wrap::after{content:'';position:absolute;left:0;right:0;bottom:0;height:39%;pointer-events:none;background:linear-gradient(to bottom,rgba(129,86,75,0) 0%,rgba(129,86,75,.07) 22%,rgba(129,86,75,.34) 53%,rgba(129,86,75,.79) 87%,#81564b 100%)}
+.end-copy{background:var(--cream);color:var(--ink);border:2px dashed #a9ce78;border-radius:13px;padding:25px 32px;margin:24px 24px 62px;font-family:'Portfolio Minguk','Pretendard Variable','Pretendard',sans-serif;font-weight:700;font-size:16px;line-height:1.4}
+.end-copy p{margin:7px 0;line-height:1.4}
+/* 하단 PDF 주석: 첫 단어는 같은 민국체 본문보다 10px 큼 */
+.end-copy .end-lead-word{font-family:inherit;font-weight:inherit;font-size:calc(1em + 10px);line-height:1;vertical-align:baseline}
+.farewell{display:flex;justify-content:center;align-items:center;margin:0 auto;max-width:300px}
+.farewell img{height:105px;width:255px;object-fit:contain}
+.contact{font-family:'Portfolio SC4','Pretendard Variable','Pretendard',sans-serif;font-size:25px;font-weight:400;letter-spacing:.22em;color:#fff;background:#ffa029;border-radius:8px;padding:5px;text-align:center;width:65%;margin:-8px auto 13px}
+.end-address{font-family:'Portfolio Minguk','Pretendard Variable','Pretendard',sans-serif;font-size:20px;font-weight:700;font-style:normal;letter-spacing:.12em;line-height:1.55;text-align:right;margin:0 17% 0 0}
+.end-address a{text-decoration:none}
+.to-top{position:fixed;z-index:5;right:19px;bottom:18px;display:grid;place-items:center;width:40px;height:40px;background:var(--green);border-radius:50%;box-shadow:0 5px 16px #0006;text-decoration:none;color:#fff}
+
+/* 모바일에서는 텍스트와 이미지가 안전하게 순서대로 읽히도록 배치 */
+@media(max-width:760px){
+ .wrap{width:calc(100% - 24px)}.topbar{padding:20px 0 22px}
+ .hero{grid-template-columns:1fr;gap:12px;padding:0 5px 14px;text-align:center}
+ .hero-pic{height:280px;max-width:280px;margin:auto}
+ .handle{text-align:center}.hero-copy{align-items:center;min-height:0}
+ .hero h1{font-size:25px}.hero p{font-size:12px}
+ .start{margin:27px 0 12px}.rule{margin:7px 11% 26px}
+ .section{margin-bottom:22px}.section-title{font-size:19px}
+ .hero-scene{display:flex;flex-direction:column;min-height:0}
+ .scene-image{position:relative;inset:auto;width:100%;height:310px;flex:none}
+ .scene-image>img{width:100%;height:100%;object-fit:cover;object-position:40% 78%;transform:none}
+ .scene-image::after{background:linear-gradient(to bottom,rgba(129,86,75,0) 55%,rgba(129,86,75,.35) 78%,#81564b 100%)}
+ .scene-contents{min-height:0;width:100%;margin:0;padding:12px;gap:12px}
+ .panel h2{font-size:20px}.panel .body{padding:12px 16px}.panel p,.panel li{font-size:12px}
+ .brown-section{padding:0 12px 17px}.brown-section .section-title{margin:0 -12px}
+ .pairs{gap:12px;margin-top:13px}.pair{grid-template-columns:1fr;min-height:0}.pair.reverse .copy{order:0}.pair .copy{padding:19px}.pair .preview{max-height:190px}
+ .pair-sticker{display:none}.banner-msg{font-size:16px;margin-top:13px}
+ .strength-list{margin:12px 0 0;gap:9px}.strength{grid-template-columns:37% 1fr}.strength strong{font-size:12px}.strength p{font-size:12px;padding:10px}
+ .bottom-wombat{width:65px}
+ .values{display:flex;flex-direction:column;min-height:0;margin-top:35px}
+ .values>.panel{width:auto;margin:15px;order:1}
+ .values>.panel .body{padding:14px 16px}.values>.panel h2{font-size:20px}.values>.panel h3{font-size:18px}.values>.panel p{font-size:12.8px;line-height:1.62}
+ .values .visual{position:relative;inset:auto;order:2;width:100%;height:315px;flex:none}
+ .values .visual img.bg{left:-7%;top:-15%;width:114%;height:152%;object-position:center center}
+ .values .visual::before{background:linear-gradient(to bottom,#81564b 0%,rgba(129,86,75,.41) 26%,rgba(129,86,75,0) 52%)}
+ .chat-group{margin-top:34px}.chat-head{font-size:14px;margin:0 8px 10px}.chat{padding:26px 16px 45px;gap:8px}
+ .bubble{max-width:82%;font-size:15px;padding:13px 18px 14px;border-radius:24px;margin-bottom:0}
+ .chat-media img{width:90px}.chat-media.wide{grid-template-columns:1fr 1fr auto;max-width:100%}.chat-media.wide img{width:100%}
+ .ending{margin-top:39px;padding-bottom:24px}.end-title{font-size:14px}
+ .ending .end-photo-wrap{height:218px}.ending .end-photo{object-position:50% 70%;transform:scale(1.18);transform-origin:50% 70%}.ending .end-photo-wrap::after{height:42%}
+ .end-copy{font-size:12px;padding:14px;margin:16px 12px 28px}.farewell img{height:76px}.contact{font-size:19px}.end-address{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+
+/* 미리캔버스 기준: 민국체는 YoonMinguk Bold(700), 민국체R은 Regular(400). */
+/* SC Dream 7 파일은 이미 ExtraBold 디자인이다. 브라우저 가짜 볼드/윤곽 효과를 추가하지 않는다. */
+.hero h1,.section-title,.panel h2,.panel h3,.pair h3,.banner-msg,.strength strong,.values .panel h2,.values .panel h3 {
+  font-synthesis:none;
+  -webkit-text-stroke:0;
+  text-shadow:none;
+  filter:none;
+}
+/* 네트워크에서 실제 WOFF 파일을 받아와야 웹폰트가 적용됩니다.
+   전 단계의 라틴어 전용 -webfont 파일은 더 이상 사용하지 않습니다. */
+.brand {font-family:'Portfolio Minguk',sans-serif;font-weight:700}
+.hero h1 {font-family:'Portfolio SC7',sans-serif;font-weight:700}
+.hero-copy>p {font-family:'Portfolio Minguk',sans-serif;font-weight:700}
+.hero .start {font-family:'Portfolio SC4',sans-serif;font-weight:400}
+.hero .pill {font-family:'Portfolio SC4',sans-serif;font-weight:400}
+.panel h2,.section-title {font-family:'Portfolio SC7',sans-serif;font-weight:700}
+.hero-scene .panel h3 {font-family:'Portfolio SC7',sans-serif;font-weight:700}
+.hero-scene .panel .date {font-family:'Portfolio Minguk',sans-serif;font-weight:700}
+.hero-scene .panel p:not(.date),.hero-scene .panel li {font-family:'Portfolio Minguk',sans-serif;font-weight:700}
+/* 각주에 표기한 '민국체R'은 별도 Regular 웨이트 적용 */
+.hero-scene .scene-note {font-family:'Portfolio Minguk',sans-serif;font-weight:400}
+.pair h3,.banner-msg,.strength strong,.values .panel h2,.values .panel h3 {
+  font-family:'Portfolio SC7',sans-serif;font-weight:700
+}
+.pair .copy p,.strength p {font-family:'Portfolio Minguk',sans-serif;font-weight:700}
+.pair .copy p {line-height:1.6}
+.values .panel p {font-family:'Portfolio Minguk',sans-serif;font-weight:700;line-height:1.6}
+.values mark {font-family:'Pretendard Variable','Pretendard',sans-serif;font-weight:500;font-size:calc(1em + 2px)}
+/* 말풍선 내부는 Pretendard Regular */
+.bubble {font-weight:400}
+
+/* 비눗방울 삽화: 검증된 '수정.png'의 좌측을 기준으로, 원화 비율을 유지하면서 전체가 보이도록 함. */
+.values .visual {position:absolute;inset:0 0 0 auto;width:55.5%;height:100%;overflow:hidden;z-index:0;background:var(--brown)}
+.values .visual img.bg {
+  position:absolute;left:-7%;top:-2%;width:118%;height:107%;max-width:none;
+  object-fit:cover;object-position:42% 54%;transform:none
+}
+/* 왼쪽에서 오른쪽으로 자연스럽게 사라지는 갈색 오버레이 */
+.values .visual::before {
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(to right,
+    #81564b 0%,rgba(129,86,75,.93) 10%,rgba(129,86,75,.68) 24%,
+    rgba(129,86,75,.28) 40%,rgba(129,86,75,.08) 52%,rgba(129,86,75,0) 63%)
+}
+@media(max-width:760px){
+  .values .visual {width:100%;height:auto;aspect-ratio:544 / 1024}
+  .values .visual img.bg {position:absolute;top:-1%;left:-4%;width:112%;height:106%;object-fit:cover;object-position:42% 56%}
+  .values .visual::before {content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,
+    #81564b 0%,rgba(129,86,75,.34) 15%,rgba(129,86,75,0) 35%)}
+}
+
+@media(max-width:760px){
+  .bubble.me::after,.bubble.them::after{bottom:-14px;width:34px;height:20px}
+  .bubble.me::after{right:10px}
+  .bubble.them::after{left:17px}
+  .bubble.me + .bubble.them,.bubble.them + .bubble.me{margin-top:25px}
+}
+
+/* 2026-10-09 : 미리캔버스 PDF(상 메모 3) 기준 영역별 타이포그래피 보정
+ * 두 참고 이미지(가치관 / 지원자 코멘트)는 글자 크기 변경 없이 유지
+ * SC7은 원본 ExtraBold 파일 그대로, 민국체는 별도 R(400) / B(700) 파일 사용
+ */
+/* 글꼴이 누락되어 보이던 프로필 표기와 보조 레이블 보정 */
+.handle {font-family:'Portfolio Minguk',sans-serif;font-weight:700;font-size:14.5px}
+.chat-media .more,.chat-note {font-family:'Pretendard Variable','Pretendard',sans-serif}
+
+/* 이미지 1·2 영역을 제외한 제목/본문만 조정 */
+.brand {font-size:19px}
+.hero h1 {font-size:30px}
+.hero-copy>p {font-size:14.2px;line-height:1.48}
+.hero .pill {font-size:12px}
+.hero .start {font-size:20px}
+.hero-scene .panel h2 {font-size:25px}
+.hero-scene .panel h3 {font-size:16px;line-height:1.3}
+.hero-scene .panel .date {font-size:13px;line-height:1.4}
+.hero-scene .panel p:not(.date),
+.hero-scene .panel li {font-size:14.2px;line-height:1.42}
+.hero-scene .scene-note {font-size:12.6px}
+.brown-section .section-title {font-size:25px}
+.pair h3 {font-size:19px}
+.pair .copy p {font-size:14.2px;line-height:1.55}
+.banner-msg {font-size:22px}
+.strength strong {font-size:16.5px}
+.strength p {font-size:14.7px;line-height:1.5}
+.chat-head {font-size:19px}
+.chat .bubble {font-family:'Pretendard Variable','Pretendard',sans-serif;font-size:20px;line-height:1.4;font-weight:400}
+.chat-media .more {font-size:15px}
+.chat-note {font-size:13px}
+
+/* 폰트 누락처럼 보이던 노란 강조 부분: PDF의 Pretendard Medium + B */
+.values mark {font-family:'Pretendard Variable','Pretendard',sans-serif;font-weight:700}
+/* 마지막 코멘트의 처음부터 끝까지 동일한 행간 1.4 (문단마다 적용) */
+.end-copy,.end-copy p {line-height:1.4}
+.end-copy .end-lead-word {line-height:inherit}
+
+@media(max-width:760px){
+ .brand {font-size:17px}
+ .handle {font-size:13.5px}
+ .hero h1 {font-size:26px}
+ .hero-copy>p {font-size:13px;line-height:1.47}
+ .hero .pill {font-size:11.5px}
+ .hero .start {font-size:19.5px}
+ .hero-scene .panel h2 {font-size:21px}
+ .hero-scene .panel h3 {font-size:15px}
+ .hero-scene .panel .date {font-size:12.5px}
+ .hero-scene .panel p:not(.date),.hero-scene .panel li {font-size:13.2px;line-height:1.45}
+ .hero-scene .scene-note {font-size:11px}
+ .brown-section .section-title {font-size:21px}
+ .pair h3 {font-size:18px}
+ .pair .copy p {font-size:13.4px;line-height:1.52}
+ .banner-msg {font-size:17px}
+ .strength strong {font-size:13px}
+ .strength p {font-size:13.1px;line-height:1.48}
+ .chat-head {font-size:16px}
+ .chat .bubble {font-size:16px;line-height:1.4}
+ .chat-media .more {font-size:13px}
+ .chat-note {font-size:11.5px}
+ /* 두 참고 이미지의 글자 크기는 확대하지 않음 */
+ .end-copy,.end-copy p {line-height:1.4}
+}
+
+
+/* 가치관 본문에서 강조하는 문구 */
+.values .pret-lg,
+.end-copy .pret-lg {
+    font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+    font-size: calc(1em + 2pt);
+    font-weight: 700;
+    line-height: inherit;
+}
+
+
+/* 2026-10-09: 채팅 이미지 간격 / 돈스타브 아이콘 / 웜뱃 삼총사 */
+.chat .bubble {font-family:'Pretendard Variable','Pretendard',sans-serif;font-weight:400;line-height:1.4}
+/* 메시지 꼬리가 아래 이미지와 겹치지 않도록 위아래 여백을 확보 */
+.chat .bubble + .chat-media {margin-top:34px}
+.chat .chat-media {margin-bottom:25px}
+/* 05 기타 질문의 왼쪽 돈스타브 아이콘만 살짝 축소하고 검정 바탕 */
+.chat-media.icons img[alt="돈스타브"] {
+  width:126px;
+  max-width:42%;
+  align-self:center;
+  background:#000;
+  object-fit:contain;
+}
+/* 마지막 웜뱃 삼총사를 크게; 하단 배너와 과하게 겹치지 않게 */
+.farewell {max-width:370px}
+.farewell img {width:330px;height:132px}
+@media(max-width:760px) {
+  .chat .bubble + .chat-media {margin-top:27px}
+  .chat .chat-media {margin-bottom:21px}
+  .chat-media.icons img[alt="돈스타브"] {width:76px;max-width:42%}
+  .farewell {max-width:280px}
+  .farewell img {width:265px;height:99px}
+}
+
+/* 2026-10-09 · 성향과 일하는 방식: 원본 시안의 가로형 카드 및 크림색 그라데이션 */
+@media (min-width: 761px) {
+  .pairs .pair {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+    height: 240px;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .pairs .pair .copy {
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    z-index: 2;
+  }
+  .pairs .pair.reverse .copy {
+    grid-column: 2;
+    grid-row: 1;
+    order: initial;
+  }
+  .pairs .pair .preview {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-height: none;
+    object-fit: cover;
+    transform: none;
+    transform-origin: center;
+  }
+  /* 기록과 정리: 노션 페이지의 달력과 우측 캐릭터를 중심으로 */
+  .pairs .pair:first-child .preview {
+    right: 0;
+    left: auto;
+    object-position: 50% 55%;
+  }
+  /* 반복개선: 상단 큰 제목을 프레임 밖으로, 노션 개선 예시를 중심으로 */
+  .pairs .pair.reverse .preview {
+    left: 0;
+    right: auto;
+    object-position: 50% 63%;
+  }
+  .pairs .pair::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    width: 52%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .pairs .pair:not(.reverse)::after {
+    right: 0;
+    background: linear-gradient(to right,
+      #fff9f0 0%, rgba(255,249,240,.82) 15%,
+      rgba(255,249,240,.12) 44%, rgba(255,249,240,0) 65%);
+  }
+  .pairs .pair.reverse::after {
+    left: 0;
+    background: linear-gradient(to left,
+      #fff9f0 0%, rgba(255,249,240,.82) 15%,
+      rgba(255,249,240,.12) 44%, rgba(255,249,240,0) 65%);
+  }
+}
+
+
+/* === 사용자 요청: 스크롤 등장 / 캐릭터 / 대화 애니메이션 === */
+/* JS가 없을 때는 모든 콘텐츠가 보이는 상태를 유지합니다. */
+.start{
+  animation: portfolioPulse 2.45s ease-in-out infinite;
+  will-change:transform;
+}
+.start:hover{filter:brightness(1.1)}
+@keyframes portfolioPulse{
+  0%,12%,57%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(128,181,71,0);filter:brightness(1)}
+  23%{transform:scale(1.075);box-shadow:0 0 0 9px rgba(128,181,71,.26);filter:brightness(1.09)}
+  34%{transform:scale(.985);box-shadow:0 0 0 15px rgba(128,181,71,.08);filter:brightness(1)}
+  45%{transform:scale(1.035);box-shadow:0 0 0 20px rgba(128,181,71,0);filter:brightness(1.055)}
+}
+/* 위쪽에서 내려오며 희미하게 등장 */
+.motion-ready .portfolio-reveal{
+  opacity:0;
+  transform:translate3d(0,-24px,0);
+  transition:opacity .80s cubic-bezier(.2,.7,.2,1),transform .80s cubic-bezier(.2,.7,.2,1);
+}
+.motion-ready .portfolio-reveal.is-visible{opacity:1;transform:translate3d(0,0,0)}
+
+/* 채팅방 틀이 먼저 나타난 후, 각 말풍선과 내부 이미지를 화면 스크롤에 맞춰 순서대로 노출 */
+.motion-ready .chat-group .bubble,
+.motion-ready .chat-group .chat-media{
+  opacity:0;
+  transform:translate3d(0,-13px,0);
+  transition:opacity .62s ease-out,transform .62s cubic-bezier(.2,.7,.2,1);
+  transition-delay:var(--chat-stagger,0ms);
+}
+.motion-ready .chat-group .bubble.is-visible,
+.motion-ready .chat-group .chat-media.is-visible{opacity:1;transform:translate3d(0,0,0)}
+
+/* 안경 쓴 웜뱃, 반짝이는 눈 웜뱃: 해당 위치에 도착하면 한 번만 swing */
+.pair-sticker,.bottom-wombat{transform-origin:center 96%}
+.motion-ready .pair-sticker.swing-in,
+.motion-ready .bottom-wombat.swing-in{animation:portfolioSwing 1.08s ease-in-out both}
+@keyframes portfolioSwing{
+  0%{transform:rotate(0deg)}
+  19%{transform:rotate(-12deg)}
+  40%{transform:rotate(9deg)}
+  59%{transform:rotate(-6deg)}
+  78%{transform:rotate(3deg)}
+  100%{transform:rotate(0deg)}
+}
+/* 문구는 과하지 않게 한 번 bounceIn */
+.motion-ready .banner-msg{opacity:0}
+.motion-ready .banner-msg.bounce-in{animation:portfolioBounceIn .85s cubic-bezier(.2,.72,.24,1) both}
+@keyframes portfolioBounceIn{
+  0%{opacity:0;transform:translateY(17px) scale(.90)}
+  55%{opacity:1;transform:translateY(-8px) scale(1.045)}
+  75%{opacity:1;transform:translateY(3px) scale(.99)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* 웜뱃 삼총사: 원본 PNG 상하의 투명 여백을 고려하여 발끝을 버튼에 실제로 겹침 */
+.farewell{
+  position:relative;
+  z-index:2;
+  width:min(410px,90%);
+  height:120px;
+  max-width:none;
+  margin:0 auto;
+  overflow:visible;
+  pointer-events:none;
+}
+.farewell img{
+  position:absolute;
+  left:0;
+  right:0;
+  top:-65px;
+  margin:0 auto;
+  display:block;
+  width:360px;
+  max-width:100%;
+  height:auto;
+  object-fit:contain;
+  transform-origin:center 70%;
+}
+.ending .contact{position:relative;z-index:1}
+/* 3.5초에 한 번: 약 1.6초 동작 + 약 1.9초 휴식. 삼총사와 버튼을 동기화. */
+.motion-ready .ending .farewell.bouncing img{
+  animation:portfolioThankBounce 3.5s cubic-bezier(.32,.03,.67,.97) infinite;
+}
+.motion-ready .ending.thank-active .contact{
+  animation:portfolioThankPress 3.5s cubic-bezier(.32,.03,.67,.97) infinite;
+}
+@keyframes portfolioThankBounce{
+  0%{transform:translateY(0) scale(1,1)}
+  11%{transform:translateY(-18px) scale(1.02,1.02)}
+  22%{transform:translateY(-8px) scale(1,1)}
+  29%{transform:translateY(3px) scale(1.035,.955)}
+  38%{transform:translateY(-4px) scale(.995,1.01)}
+  47%,100%{transform:translateY(0) scale(1,1)}
+}
+@keyframes portfolioThankPress{
+  0%,22%{transform:translateY(0) scaleY(1)}
+  29%,33%{transform:translateY(3px) scaleY(.95)}
+  43%,100%{transform:translateY(0) scaleY(1)}
+}
+@media(max-width:760px){
+  .farewell{width:min(320px,88%);height:100px}
+  .farewell img{width:280px;max-width:100%;height:auto;top:-47px}
+}
+/* 움직임 최소화 환경에서는 애니메이션 없이 바로 표시 */
+@media(prefers-reduced-motion:reduce){
+  .start,
+  .motion-ready .ending .farewell.bouncing img,
+  .motion-ready .ending.thank-active .contact,
+  .motion-ready .pair-sticker.swing-in,
+  .motion-ready .bottom-wombat.swing-in,
+  .motion-ready .banner-msg.bounce-in{animation:none!important}
+  .motion-ready .portfolio-reveal,
+  .motion-ready .chat-group .bubble,
+  .motion-ready .chat-group .chat-media{
+    opacity:1!important;transform:none!important;transition:none!important
+  }
+  .motion-ready .banner-msg{opacity:1!important}
+}
+
+
+/* === 우측 상단 고정 목차 (Notion 스타일, 기존 초록/갈색 팔레트) === */
+.toc-shell{position:fixed;right:clamp(12px,2.5vw,34px);top:18px;z-index:120;font-family:'Pretendard Variable','Pretendard',sans-serif}
+.toc-toggle{display:flex;align-items:center;gap:8px;justify-content:center;min-width:90px;border:1px solid rgba(129,86,75,.21);border-radius:10px;background:var(--cream);color:var(--brown);box-shadow:0 5px 18px rgba(0,0,0,.17);padding:9px 13px;font-family:inherit;font-size:13px;font-weight:650;line-height:1.2;cursor:pointer;transition:background .18s ease,transform .18s ease}
+.toc-toggle:hover,.toc-toggle[aria-expanded="true"]{background:#f1f4e7;transform:translateY(-1px)}
+.toc-toggle-symbol{font-family:system-ui,sans-serif;font-size:20px;line-height:.75;color:var(--green);font-weight:800}
+.toc-panel{position:absolute;top:calc(100% + 9px);right:0;display:flex;flex-direction:column;width:min(342px,calc(100vw - 24px));max-height:min(73vh,670px);overflow:hidden;background:var(--cream);color:var(--brown);border:1px solid rgba(129,86,75,.18);border-radius:13px;box-shadow:0 14px 44px rgba(0,0,0,.28)}
+.toc-panel[hidden]{display:none}
+.toc-panel-header{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 12px;border-bottom:1px solid rgba(129,86,75,.13);font-size:12px;font-weight:760;letter-spacing:.12em}
+.toc-panel-ko{font-weight:650;letter-spacing:0;margin-left:7px;color:#80786b}
+.toc-close{border:0;background:transparent;color:var(--brown);font:26px/1 system-ui,sans-serif;cursor:pointer;border-radius:6px;padding:0 4px}
+.toc-links{overflow-y:auto;overscroll-behavior:contain;padding:11px 12px 14px;scrollbar-width:thin}
+.toc-links a{display:block;text-decoration:none;color:var(--brown);font-family:'Pretendard Variable','Pretendard',sans-serif;font-size:13px;font-weight:500;line-height:1.35;padding:8px 10px;border-radius:7px;word-break:keep-all;transition:background .12s ease}
+.toc-links a:hover{background:#edece0}
+.toc-links a.is-current{background:#e4edcf;color:#52762e;font-weight:700}
+.toc-group{font-weight:750!important;font-size:14px!important;margin-top:4px}
+.toc-group:first-child{margin-top:0}
+.toc-group-last{margin-top:12px;border-top:1px solid rgba(129,86,75,.13);padding-top:13px!important}
+.toc-children{margin:3px 0 12px 12px;padding-left:10px;border-left:2px solid #d5dec4}
+.toc-children a{font-weight:450}
+.toc-toggle:focus-visible,.toc-close:focus-visible,.toc-links a:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+/* 페이지의 앵커 링크가 목차 뒤에 가려지지 않게 위치 보정 */
+#about,#experience,#workstyle,#strengths,#values,#chat,#chat-01,#chat-02,#chat-03,#chat-04,#chat-05,#chat-06,#contact{scroll-margin-top:88px}
+/* 말풍선 문장은 실제 채팅처럼 왼쪽 정렬 + 자동 줄바꿈 */
+.chat .bubble{white-space:normal;text-align:left;word-break:normal;overflow-wrap:break-word;line-break:auto}
+@media(max-width:760px){
+  .toc-shell{top:12px;right:12px}
+  .toc-toggle{min-width:76px;padding:8px 10px;font-size:12px}
+  .toc-panel{max-height:min(78vh,660px)}
+}
+@media(prefers-reduced-motion:reduce){.toc-toggle,.toc-links a{transition:none}}
+
+</style>
+</head>
+<body id="top">
+<header class="wrap topbar"><a class="brand" href="#top">PORTFOLIO</a></header>
+<!-- 페이지 어디에서든 펼칠 수 있는 노션 스타일 목차 -->
+<div class="toc-shell" id="toc-shell">
+  <button class="toc-toggle" id="toc-toggle" type="button" aria-expanded="false" aria-controls="toc-panel" aria-label="목차 열기">
+    <span aria-hidden="true" class="toc-toggle-symbol">☷</span><span>목차</span>
+  </button>
+  <nav class="toc-panel" id="toc-panel" aria-label="포트폴리오 목차" hidden>
+    <div class="toc-panel-header"><span>CONTENTS <span class="toc-panel-ko">목차</span></span><button class="toc-close" type="button" id="toc-close" aria-label="목차 닫기">×</button></div>
+    <div class="toc-links">
+      <a class="toc-group" href="#about">메인</a>
+      <div class="toc-children">
+        <a href="#experience">경력</a>
+        <a href="#workstyle">성향과 일하는 방식</a>
+        <a href="#strengths">직무 관련 경험과 강점</a>
+        <a href="#values">캐릭터챗에 대한 가치관</a>
+      </div>
+      <a class="toc-group" href="#chat">대화 채팅</a>
+      <div class="toc-children">
+        <a href="#chat-01">01. 자기소개</a>
+        <a href="#chat-02">02. 지원동기</a>
+        <a href="#chat-03">03. 사전 인터뷰</a>
+        <a href="#chat-04">04. 업무에 관한 질문</a>
+        <a href="#chat-05">05. 기타 질문</a>
+        <a href="#chat-06">06. 입사 후 포부</a>
+      </div>
+      <a class="toc-group toc-group-last" href="#contact">지원자 코멘트</a>
+    </div>
+  </nav>
+</div>
+<main class="wrap">
+<section class="hero" id="about"><div class="profile"><div class="hero-pic"><img alt="웜뱃 캐릭터 프로필" data-img="브이 웜뱃.png|브이 웜벳.png|브이 웜뱃 프로필.png|반짝이는 눈 웜벳.png"/></div><div class="handle">@Oh_Seoyeon</div></div><div class="hero-copy"><h1>About Oh-Seoyeon <span class="star">★</span></h1><p>좋아하는 콘텐츠는 직접 경험하고, 불편한 점은 계속 개선해 나갑니다.<br/>저와 닮은 웜뱃을 포트폴리오의 아바타로 사용했습니다.</p><div class="tags"><span class="pill">artist</span><span class="pill">creator</span><span class="pill">portfolio</span><span class="pill">about_me</span></div><a class="start" href="#experience">새 대화 시작</a></div></section>
+<hr class="rule"/>
+<section class="section hero-scene" id="experience"><div class="scene-image"><img alt="가을 숲 속 웜뱃 일러스트" data-img="가을 웜뱃 일러스트.png"/></div><div class="scene-contents"><div class="panel"><h2>BACKGROUND</h2><div class="body"><p class="date">2022.03 ~ 2024.02</p><h3>EDUCATION</h3><p>청암대학교 웹툰콘텐츠과 졸업</p><br/><p class="date">2024.06 ~ 2025.02</p><h3>EXPERIENCE</h3><p>청암대학교 원격교육지원센터 근무</p></div></div><div class="panel"><h2>ACTIVITIES</h2><div class="body"><p class="date">2022.03 ~ 2024.02</p><h3>교내 활동</h3><ul><li>청춘창고 VR 스퀘어 국가근로</li><li>순천 웹툰페스티벌 굿즈 부스 운영</li><li>전남콘텐츠코리아랩 웹툰 콘텐츠 발굴 수상</li><li>BELIVVR 국가근로</li><li>전남콘텐츠코리아랩 웹툰 단편제작</li><li>K-스타일즈 인스타툰 제작</li><li>전남 웹툰페스티벌 굿즈 부스 운영</li><li>신문방송부 동아리 활동</li><li>전남 미디어 국가근로</li></ul><br/><p class="date">2024.03 ~ 2026.10</p><h3>개인 활동</h3><ul><li>2024 글로벌 콘텐츠 페스티벌 in 순천 굿즈 부스 운영</li><li>원도심 콘텐츠 Wants 굿즈 부스 운영</li><li>텀블벅 크라우드 펀딩: 창작자 노션 템플릿</li><li>2025 글로벌 콘텐츠 페스티벌 in 순천 굿즈 부스 운영</li><li>텀블벅 크라우드 펀딩: 스티커 (콘텐츠 아카데미 커뮤니티 활동 참여)</li><li>텀블벅 크라우드 펀딩: 아카이브 노션 템플릿</li><li>K-스타일즈 해외 이벤트용 NFC 카드 디자인</li></ul></div></div><p class="scene-note">자세한 내용은 이력서 및 노션DB 참고 부탁드립니다.</p></div></section>
+<section class="section brown-section" id="workstyle"><h2 class="section-title">성향과 일하는 방식</h2><div class="pairs"><div class="pair"><div class="copy"><h3>기록과 정리</h3><p>“생각이 많아서 정리하고 과정을 기록해요.”</p><p>우선 정리부터 하는 편입니다.<br/>여러 업무가 겹치면 해야 할 일을 한 번에 붙잡기보다<br/>일정과 마감을 기준으로 우선순위를 정합니다.</p></div><img alt="일정과 업무를 정리한 노션 화면" class="preview" data-img="대학 근무 노션.png"/></div><div class="pair reverse"><div class="copy"><h3>반복개선</h3><p>“한 번 만들고 끝내기보다는 계속 고치는 편이에요.”</p><p>불편한 부분이 보이면 지금 구조에서<br/>바꿀 수 있는 방법을 찾아 하나씩 수정해 나갑니다.</p></div><img alt="아카이브 노션 개선 화면" class="preview" data-img="아카이브 노션.png"/></div></div><img alt="책을 든 웜뱃" class="pair-sticker" data-img="안경 쓴 책더미 웜뱃.png"/><p class="banner-msg">정리는 좋아서 하고, 개선은 저의 습관입니다.</p></section>
+<section class="section brown-section strengths" id="strengths"><h2 class="section-title">직무 관련 경험과 강점</h2><div class="strength-list"><div class="strength"><strong>사용자이자 창작자</strong><p>캐릭터챗을 이용하고, 직접 캐릭터와 세계관을 만들며 사용자와 창작자 양쪽의 관점을 경험했습니다.</p></div><div class="strength"><strong>기획과 운영</strong><p>대학 프로그램과 행사, 굿즈 부스, 크라우드펀딩 등을 직접 기획하고 운영하며 아이디어를 실제 결과물로 만들어 왔습니다.</p></div><div class="strength"><strong>응대와 커뮤니티</strong><p>대학 프로그램과 행사, 굿즈 부스, 크라우드펀딩을 운영하며 학생·교수·소비자·후원자를 직접 응대하고 단체 채팅방도 관리했습니다.</p></div><div class="strength"><strong>설문조사와 리서치</strong><p>프로그램·센터 운영에 필요한 사례와 자료를 찾아 실제 업무에 적용하고, 참여자 설문 결과를 이후 운영 개선에 참고했습니다.</p></div><div class="strength"><strong>툴 활용</strong><p>엑셀과 AI로 이수율·출결 데이터를 정리하고, 노션으로 일정과 자료를 관리했습니다. 또 AI를 기획과 문서 작성에 활용했습니다.</p></div><div class="strength"><strong>콘텐츠 검수</strong><p>대학 프로그램 참가자 디지털 콘텐츠 검수 및 평가를 진행해왔으며, 성인 등급 웹툰을 다시 AI로 생성하는 알바를 단기간 경험했습니다.</p></div></div><img alt="웜뱃" class="bottom-wombat" data-img="반짝이는 눈 웜벳.png"/></section>
+<section class="section values" id="values"><div class="panel"><h2>캐릭터챗에 대한 가치관</h2><div class="body"><h3>또 하나의 창작</h3><p>저는 AI 캐릭터챗이 <mark>창작 방식의 선택지</mark>를 넓힌 콘텐츠라고 생각합니다. 웹툰, 영화, 드라마처럼 완성된 서사를 처음부터 끝까지 설계하는 방식과 달리, 캐릭터와 세계관을 중심으로 <span class="pret-lg">이야기를 열어 두고</span> 사용자와 AI의 상호작용을 통해 전개가 만들어진다는 점이 특징이라고 생각합니다.<br/>그래서 스토리 관련 전공이나 교육 경험과 관계없이, 캐릭터와 설정에 대한 <span class="pret-lg">아이디어가 있는 사람이라면</span> 자신만의 아이디어로 창작에 참여할 수 있다는 점이 좋은 경험을 준다고 생각합니다.</p><p>저 역시 웹툰 전공이지만 제작 속도가 빠른 편은 아니라, 떠올린 설정과 캐릭터를 작품으로 완성하는 데 부담을 느낄 때가 있었습니다. AI 캐릭터챗은 이미 만들어 둔 캐릭터와 세계관을 바탕으로 이야기를 확장할 수 있어, 제가 가진 아이디어를 <mark>더 쉽게 창작</mark>으로 이어갈 수 있다는 점에서 매력적이라고 생각합니다.</p><h3>부담이 적은 플레이 경험</h3><p>AI 캐릭터챗이 텍스트 게임이나 포인트 앤 클릭 게임과 비슷한 면이 있다고 생각합니다. <span class="pret-lg">복잡한 조작이나 많은 버튼 없이</span>도 선택과 대화만으로 이야기에 들어갈 수 있기 때문입니다.</p><p>사람들과 함께 플레이하는 게임은 상대의 반응이나 흐름을 신경 써야 해서 피곤하게 느껴질 때가 있지만, AI 캐릭터챗은 그런 부담 없이 <mark>제 속도로 이야기를 이어갈 수 있습니다.</mark> 그래서 <span class="pret-lg">혼자 천천히 몰입</span>할 수 있으면서도, 선택에 따라 이야기가 달라지는 게임 같은 경험을 준다고 생각합니다.</p></div></div><div class="visual"><img alt="비눗방울 속 웜뱃 일러스트" class="bg" data-img="비눗방울 웜뱃 일러스트 수정.png"/></div></section>
+<section class="chat-group" id="chat"><div class="chat-head" id="chat-01"><strong>〈　01. 자기소개</strong><span>⚙</span></div><div class="chat"><div class="bubble me">안녕하세요.</div><div class="bubble me">간단하게 자기소개 부탁드립니다.</div><div class="bubble them">안녕하세요.</div><div class="bubble them">AI 캐릭터 챗 서비스 운영 및 기획에 지원한 오서연입니다.</div><div class="bubble them">저는 주어진 업무를 처리하는 것보다 더 나은 방향이 있다면 의견을 나누며 일하는 편입니다. 대학에서 근무할 때도 교수님과 학생들이 더 편하게 이용할 수 있는 환경을 고민하며 여러 개선점을 생각해 왔습니다. 그래서 제 의견을 나누고 실제 업무에 반영해 볼 수 있는 환경에서 더 적극적으로 일하고 싶습니다.</div></div></section>
+<section class="chat-group" id="chat-02"><div class="chat-head"><strong>〈　02. 지원동기</strong><span>⚙</span></div><div class="chat"><div class="bubble me">새플리에 지원하게 된 계기가 있으실까요?</div><div class="bubble them">새플리 공고에서 업무의 목적을 이해하고, 더 나은 방향을 함께 고민하는 사람을 찾고 있다는 부분이 인상깊었습니다.</div><div class="bubble them">저는 대학에서 근무할 때, 교수님과 학생들이 더 편하게 이용할 수 있는 환경을 만들고 싶어 여러 개선점을 생각했지만, 의견을 직접 반영할 기회는 많지 않았습니다. 그 경험을 통해 제안이나 아이디어를 낼 수 있는 환경이 저에게는 중요하다는 것을 알게 됐습니다.</div><div class="bubble them">저도 AI 캐릭터 챗 사용자이자 창작자로서 느낀 점을 적극적으로 나누고, 정해진 일을 수행하는 데서 끝나지 않고 서비스가 더 좋아지는 과정에 함께하고 싶습니다.</div></div></section>
+<section class="chat-group" id="chat-03"><div class="chat-head"><strong>〈　03. 사전 인터뷰</strong><span>⚙</span></div><div class="chat"><div class="bubble me">캐릭터챗 경험에 관한 질문입니다.</div><div class="bubble me">가장 많이 이용한 캐릭터챗 또는 AI 캐릭터 서비스는 무엇인가요? 계속 사용하거나 결제한 이유, 그리고 가장 아쉬웠던 점은 무엇이 있었나요?</div><div class="bubble them">케이브덕과 크랙을 가장 많이 이용했습니다. 여러 캐릭터와 다양한 이야기를 즐기다 보니 작품 수가 많아 선택지가 다양한 플랫폼을 자주 찾게 되었습니다.</div><div class="chat-media icons"><img alt="케이브덕" data-img="케이브덕 아이콘.png"/><img alt="크랙" data-img="크랙 아이콘.png"/></div><div class="bubble them">계속 이용하거나 결제하게 되는 가장 큰 이유는 이야기의 끝을 보고 싶었기 때문입니다. 탈출이나 연애처럼 목표나 엔딩이 있는 경우에는 결과가 궁금해 계속 플레이했던 것 같습니다. 재미있게 즐긴 작품의 제작자가 만든 다른 캐릭터나 세계관도 찾아보면서 자연스럽게 같은 플랫폼을 계속 이용하게 되었습니다.</div><div class="bubble them">아쉬운 점이 있다면 좋아하던 제작자가 별도 안내 없이 사라지는 경우였습니다. 또, 업데이트로 기존 사용 경험까지 크게 달라지는 경우에는 아쉬움이 있었습니다. 사용자 의견과 플랫폼이 추구하는 방향 사이의 균형도 중요하다고 느꼈습니다.</div><div class="bubble me">문제 해결 경험에 관한 질문입니다.</div><div class="bubble me">누군가 시키지 않았지만 문제를 발견하고 직접 해결해 본 경험과 함께 본인이 한 행동, 결과 또는 배운 점을 포함해 말씀부탁드립니다.</div><div class="bubble them">국가근로로 VR 게임 센터에서 일했을 때 이용자가 많아 같은 안내와 주의사항을 계속 반복해야 했습니다. 특히 어린 이용자도 많아 말로만 설명하는 데 한계가 있다고 느껴, 주의사항을 컷툰 형태로 직접 그려 누구나 쉽게 이해할 수 있는 안내 가이드를 만들었습니다.</div><div class="chat-media wide"><img alt="정글번지 안내 컷툰" data-img="인스타 청춘창고 01.jpg"/><img alt="배틀 아레나 안내 컷툰" data-img="인스타 청춘창고 06.jpg"/><span class="more">+ 9장</span></div><div class="bubble them">대학에서는 방음이 부족한 스튜디오에 방음 시공을 진행했고, 여러 명이 이용할 때 서서 기다려야 하는 불편을 줄이기 위해 대기석을 마련하고, 발소리를 줄이기 위해 슬리퍼도 비치했습니다. 크라우드 펀딩 노션 템플릿에서 같은 URL이 반복 저장되는 문제를 발견해 중복 URL만 따로 확인할 수 있는 DB를 추가했습니다.</div><div class="bubble them">저는 이렇게 반복해서 불편한 점이 보이면, 익숙한 방식대로 두기보다 현재 가능한 해결 방법을 만들어 보는 편입니다.</div><div class="bubble me">초기팀 우선순위에 관한 질문입니다.</div><div class="bubble me">크리에이터 문의 증가, 사용자 CS 증가, 신규 가입자 재방문 저하 중 하나를 먼저 해결해야 한다면 무엇을 고를 것 같나요? 이유와 첫 행동도 같이 알려주세요.</div><div class="bubble them">저라면 크리에이터 문의 증가를 먼저 볼 거 같습니다. 만약 세 문제가 동시에 생겼다면 공통 원인이 있을 가능성이 높다고 생각되기 때문입니다.</div><div class="bubble them">캐릭터챗은 크리에이터의 콘텐츠가 사용자 유입과 재방문으로 이어지기 때문에, 크리에이터 쪽 문제의 영향 범위가 클 수 있다고 생각합니다. 먼저 문의를 유형별로 나누고, 같은 시기 사용자 CS와 재방문 저하에도 연결되는 문제가 있는지 조사할 거 같습니다.</div></div></section>
+<section class="chat-group" id="chat-04"><div class="chat-head"><strong>〈　04. 업무에 관한 질문</strong><span>⚙</span></div><div class="chat"><div class="bubble me">여러 업무가 동시에 들어오면 어떻게 하나요?</div><div class="bubble them">해야할 일을 머릿속으로 정리하고 마감일과 중요도에 따라 우선순위를 정해 노션에 적어 두고 하나씩 처리합니다.</div><div class="bubble me">피드백을 받으면 어떻게 하나요?</div><div class="bubble them">피드백을 주신 이유를 먼저 들어보려고 합니다. 수정이 필요한 부분은 바로 반영하되, 제가 다르게 생각하는 부분은 이유를 정리해서 다시 의견을 나눕니다.</div><div class="bubble me">초기 단계 팀에서 여러 역할을 맡는 것에 대해 어떻게 생각하나요?</div><div class="bubble them">오히려 좋은 기회라고 생각합니다. 팀 전체의 방향과 각 업무가 어떻게 연결되는지 이해할 수 있고, 그 과정에서 지금 필요한 일이 무엇인지 더 잘 파악할 수 있다고 생각합니다.</div></div></section>
+<section class="chat-group" id="chat-05"><div class="chat-head"><strong>〈　05. 기타 질문</strong><span>⚙</span></div><div class="chat"><div class="bubble me">요즘 즐겨보거나 좋아하는 콘텐츠는 무엇인가요?</div><div class="bubble them">생존 게임을 좋아합니다. 또한 요즘 제가 가장 좋아하는 콘텐츠는 치이카와입니다. 귀여움과 반전되는 다크한 세계관의 매력에 빠져 있습니다.</div><div class="chat-media icons"><img alt="돈스타브" data-img="돈스타브.png"/><img alt="치이카와" data-img="치이카와.png"/></div><div class="bubble me">직접 만들어 본 캐릭터챗이 있나요?</div><div class="bubble them">네. 있습니다. 하지만 제가 의도하는 방향으로 흘러가지 않아 계속 수정 중으로 현재는 비공개 상태입니다.</div><div class="bubble me">스트레스는 어떻게 관리하나요?</div><div class="bubble them">좋아하는 것들로 스트레스를 풉니다. 음식을 먹으며 풀기도 하며 귀여운 콘텐츠를 보며 기분을 전환합니다.</div><div class="bubble me">현재 거주지와 근무지가 다른데 괜찮으실까요?</div><div class="bubble them">네. 현재는 순천에 거주하고 있습니다. 입사 후에는 근무지를 기준으로 생활권을 옮겨 출퇴근 거리 때문에 업무에 지장이 생기지 않도록 하겠습니다.</div></div></section>
+<section class="chat-group" id="chat-06"><div class="chat-head"><strong>〈　06. 입사 후 포부</strong><span>⚙</span></div><div class="chat"><div class="bubble me">입사 후 포부를 말씀해주세요.</div><div class="bubble them">입사 후에는 운영 방식부터 익히고, 사용자와 크리에이터가 실제로 어떤 부분에서 불편함을 느끼는지 살펴보겠습니다.</div><div class="bubble them">또한, 문제와 개선점을 찾아 의견을 내고, 작은 것부터 바꿔 가고, 여러 아이디어도 적용해 보며 새플리가 더 좋은 방향으로 나아가는 과정에 함께하고 싶습니다.</div></div></section>
+<section class="section ending" id="contact"><h2 class="end-title">지원자 코멘트</h2><div class="end-photo-wrap"><img alt="지하철 플랫폼의 웜뱃" class="end-photo" data-img="웜뱃 지하철 일러스트.png"/></div><div class="end-copy"><p><span class="end-lead-word">이번</span> 포트폴리오는 제가 자주 이용해 온 캐릭터챗 UI에서 아이디어를 얻어 <span class="pret-lg">HTML로 재구성</span>했습니다.</p><p>저에게도 <span class="pret-lg">새로운 방식</span>의 포트폴리오를 <span class="pret-lg">시도해 보는 경험</span>이었습니다. 평소 캐릭터챗을 이용하며 필요한 자료나 떠오른 아이디어를 <span class="pret-lg">노션에 정리</span>해 두고 있습니다. 새플리에서 일하게 된다면 서비스를 더 깊이 이해하고, 그 아이디어들이 실제로 가능한지 확인하고 <span class="pret-lg">적용해 보고 싶습니다.</span></p></div><div class="farewell"><img alt="웜뱃 삼총사" data-img="웜뱃 삼총사.png"/></div><div class="contact">Thank You</div><address class="end-address">010.4694.1099<br/><a href="mailto:asd46941099@gmail.com">asd46941099@gmail.com</a></address></section>
+</main>
+<script>
+// 이미지 파일은 아래 공개 GitHub 저장소의 main 브랜치 최상위에 있습니다.
+// GitHub Pages와 같은 저장소에 index.html을 올리면 상대 경로로도 접근할 수 있습니다.
+const repoBase='https://raw.githubusercontent.com/Mongpposyong/Portfolio/main/';
+for(const img of document.querySelectorAll('img[data-img]')){
+  const filenames = img.dataset.img.split('|').map(v=>v.trim()).filter(Boolean);
+  img.loading='lazy';
+  let i = 0;
+  const tryLoad = () => {
+    if(i >= filenames.length){
+      img.alt += ' (이미지를 불러올 수 없습니다)';
+      img.style.background = '#ebe9df';
+      return;
+    }
+    img.src = repoBase + encodeURIComponent(filenames[i]);
+    i += 1;
+  };
+  img.addEventListener('error', tryLoad);
+  tryLoad();
+}
+// 목차 열기/닫기: 마우스, 키보드, 외부 클릭까지 지원.
+(() => {
+  const shell = document.getElementById('toc-shell');
+  const toggle = document.getElementById('toc-toggle');
+  const panel = document.getElementById('toc-panel');
+  const closeButton = document.getElementById('toc-close');
+  const links = Array.from(panel.querySelectorAll('a[href^="#"]'));
+  const openMenu = () => {
+    panel.hidden = false;
+    toggle.setAttribute('aria-expanded','true');
+    toggle.setAttribute('aria-label','목차 닫기');
+  };
+  const closeMenu = (returnFocus = false) => {
+    panel.hidden = true;
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-label','목차 열기');
+    if (returnFocus) toggle.focus();
+  };
+  toggle.addEventListener('click', () => panel.hidden ? openMenu() : closeMenu());
+  closeButton.addEventListener('click', () => closeMenu(true));
+  links.forEach(link => link.addEventListener('click', () => closeMenu()));
+  document.addEventListener('pointerdown', e => {
+    if (!panel.hidden && !shell.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && !panel.hidden) closeMenu(true);
+  });
+  // 스크롤 위치와 가장 가까운 목차 항목을 표시한다.
+  const targets = links.map(link => ({ link, el: document.getElementById(link.hash.slice(1)) }))
+    .filter(item => item.el);
+  let framePending = false;
+  function highlightCurrent() {
+    framePending = false;
+    const point = window.scrollY + 118;
+    let selected = targets[0];
+    for (const item of targets) {
+      if (item.el.getBoundingClientRect().top + window.scrollY <= point) selected = item;
+    }
+    for (const item of targets) {
+      const active = item === selected;
+      item.link.classList.toggle('is-current', active);
+      if (active) item.link.setAttribute('aria-current', 'location');
+      else item.link.removeAttribute('aria-current');
+    }
+  }
+  window.addEventListener('scroll', () => {
+    if (!framePending) {
+      framePending = true;
+      window.requestAnimationFrame(highlightCurrent);
+    }
+  }, {passive:true});
+  window.addEventListener('hashchange', highlightCurrent);
+  highlightCurrent();
+})();
+
+// Scroll effects use native IntersectionObserver. No external animation library required.
+(() => {
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced || !('IntersectionObserver' in window)) return;
+
+  const sections = Array.from(document.querySelectorAll(
+    '.hero, .rule, .hero-scene, .brown-section, .values, .chat-group, .ending'
+  ));
+  sections.forEach(node => node.classList.add('portfolio-reveal'));
+  document.documentElement.classList.add('motion-ready');
+
+  // Messages get their own observer: a long chat unfolds as its content comes into view.
+  const messageObserver = new IntersectionObserver(entries => {
+    const appearing = entries.filter(e => e.isIntersecting)
+      .sort((a,b) => a.target.compareDocumentPosition(b.target) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1);
+    const byRoom = new Map();
+    appearing.forEach(e => {
+      const room=e.target.closest('.chat-group');
+      const index=byRoom.get(room)||0;
+      e.target.style.setProperty('--chat-stagger',Math.min(index,4)*115+'ms');
+      byRoom.set(room,index+1);
+      e.target.classList.add('is-visible');
+      messageObserver.unobserve(e.target);
+    });
+  },{threshold:0.08,rootMargin:'0px 0px -7% 0px'});
+
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      const target=entry.target;
+      target.classList.add('is-visible');
+      sectionObserver.unobserve(target);
+      if(target.classList.contains('chat-group')) {
+        // Let the room itself settle a moment before fading in its messages.
+        window.setTimeout(() => {
+          target.querySelectorAll('.bubble, .chat-media').forEach(el => messageObserver.observe(el));
+        }, 210);
+      }
+    });
+  },{threshold:0.015,rootMargin:'0px 0px -6% 0px'});
+  sections.forEach(el => sectionObserver.observe(el));
+
+  // Apply one-time animations only when their subjects can actually be seen.
+  const accents = [
+    [document.querySelector('.pair-sticker'),'swing-in'],
+    [document.querySelector('.banner-msg'),'bounce-in'],
+    [document.querySelector('.bottom-wombat'),'swing-in'],
+    [document.querySelector('.farewell'),'bouncing']
+  ];
+  const accentObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(!entry.isIntersecting) return;
+      const el=entry.target;
+      const style=accents.find(item => item[0]===el);
+      if(!style) return;
+      el.classList.add(style[1]);
+      if(style[1]==='bouncing') el.closest('.ending')?.classList.add('thank-active');
+      accentObserver.unobserve(el);
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -8% 0px'});
+  accents.forEach(([el]) => {if(el && getComputedStyle(el).display!=='none') accentObserver.observe(el)});
+})();
+
+</script>
+</body></html>
